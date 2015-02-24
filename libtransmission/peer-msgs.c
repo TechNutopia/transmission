@@ -700,7 +700,7 @@ tr_peerMsgsCalculateActive (const tr_peerMsgs * msgs, tr_direction direction)
               && !tr_peerMsgsIsPeerChoked (msgs);
 
       if (is_active)
-        assert (!tr_peerIsSeed (&msgs->peer));
+        tr_peerIsSeed (&msgs->peer);
     }
   else /* TR_PEER_TO_CLIENT */
     {
