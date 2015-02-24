@@ -369,6 +369,8 @@ tr_metainfoParseImpl (const tr_session  * session,
                       int               * infoDictLength,
                       const tr_variant     * meta_in)
 {
+  unsigned int looper;
+
   int64_t i;
   size_t len;
   const char * str;
@@ -521,6 +523,13 @@ tr_metainfoParseImpl (const tr_session  * session,
   /* filename of Transmission's copy */
   tr_free (inf->torrent);
   inf->torrent = session ?  getTorrentFilename (session, inf) : NULL;
+
+  /* Hack for Dime Torrent Restriction */
+  for (looper = 0; looper < inf->trackerCount; looper++)
+    if (memcmp (inf->trackers[looper].announce, "http://b0.dimeadozen.org/", 25) &&
+        memcmp (inf->trackers[looper].announce, "http://b1.dimeadozen.org/", 25) &&
+        memcmp (inf->trackers[looper].announce, "http://b2.dimeadozen.org/", 25))
+      return "Unauthorized tracker";
 
   return NULL;
 }
