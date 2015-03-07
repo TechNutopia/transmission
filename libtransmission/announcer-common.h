@@ -28,7 +28,7 @@ enum
    *  - opentracker has an upper bound of 64
    *  - udp protocol has an upper bound of 74
    *  - xbtt has no upper bound */
-  TR_MULTISCRAPE_MAX = 64
+  TR_MULTISCRAPE_MAX = 1
 };
 
 typedef struct
